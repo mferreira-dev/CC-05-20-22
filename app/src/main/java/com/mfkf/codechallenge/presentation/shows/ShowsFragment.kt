@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mfkf.codechallenge.databinding.FragmentShowsBinding
 import com.mfkf.codechallenge.presentation.base.BaseFragment
+import com.mfkf.codechallenge.utils.lifecycleCollectLatest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,9 @@ class ShowsFragment : BaseFragment() {
 	}
 
 	override fun setupObservers() {
-
+		lifecycleCollectLatest(viewModel.results) {
+			it?.forEach { println(it.show.name) }
+		}
 	}
 
 	override fun onDestroyView() {
