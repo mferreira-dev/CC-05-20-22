@@ -6,7 +6,6 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class CodeChallenge : Application() {
-
 	companion object {
 		var instance: CodeChallenge? = null
 		fun applicationContext(): Context = instance!!.applicationContext
@@ -16,5 +15,4 @@ class CodeChallenge : Application() {
 		super.onCreate()
 		instance = this
 	}
-
 }

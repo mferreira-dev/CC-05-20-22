@@ -5,7 +5,6 @@ package com.mfkf.codechallenge.utils
  * Network request response handler class.
  */
 sealed class Either<out L, out R>{
-
 	data class Success<L>(val response: L) : Either<L, Nothing>()
 	data class Failure<R>(val reason: R) : Either<Nothing, R>()
 
@@ -15,5 +14,4 @@ sealed class Either<out L, out R>{
 			is Failure -> { failure(reason) }
 		}
 	}
-
 }
