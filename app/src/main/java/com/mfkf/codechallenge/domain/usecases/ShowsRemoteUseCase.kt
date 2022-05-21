@@ -13,12 +13,18 @@ class ShowsRemoteUseCase
 constructor(private var showsRemoteRepositoryImpl: ShowsRemoteRepositoryImpl) : BaseUseCase() {
 
 	suspend fun searchShows(query: String): Either<List<Media>, Failure> =
-		networkCall { showsRemoteRepositoryImpl.searchShows(query) }
+		networkCall {
+			showsRemoteRepositoryImpl.searchShows(query)
+		}
 
 	suspend fun singleSearchShows(query: String): Either<List<Media>, Failure> =
-		networkCall { showsRemoteRepositoryImpl.singleSearchShows(query) }
+		networkCall {
+			showsRemoteRepositoryImpl.singleSearchShows(query)
+		}
 
 	suspend fun fetchAliases(id: Int): Either<List<Alias>, Failure> =
-		networkCall { showsRemoteRepositoryImpl.fetchAliases(id) }
+		networkCall {
+			showsRemoteRepositoryImpl.fetchAliases(id)
+		}
 
 }
