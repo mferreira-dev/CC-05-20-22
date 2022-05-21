@@ -1,8 +1,7 @@
 package com.mfkf.codechallenge.utils
 
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mfkf.codechallenge.presentation.base.BaseFragment
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -21,7 +20,10 @@ fun String.Companion.empty() = ""
  * @param flow Data stream to be observed.
  * @param collect Higher-order function to be used as the flow's callback.
  */
-fun <T> BaseFragment.lifecycleCollectLatest(flow: Flow<T>, collect: suspend (T) -> Unit) {
+fun <T> BaseFragment.lifecycleCollectLatest(
+	flow: Flow<T>,
+	collect: suspend (T) -> Unit
+) {
 	lifecycleScope.launchWhenStarted {
 		flow.collectLatest(collect)
 	}
@@ -29,14 +31,37 @@ fun <T> BaseFragment.lifecycleCollectLatest(flow: Flow<T>, collect: suspend (T) 
 
 /**
  *
- * Generic function to initialize a RecyclerView using a PagingDataAdapter.
+ * Generic function that initializes an observer.
  *
- * @param adapter Adapter to be set to the RecyclerView. Must inherit from PagingDataAdapter
- * @param recyclerView RecyclerView to be used.
+ * @param flow Data stream to be observed.
+ * @param collect Higher-order function to be used as the flow's callback.
  */
-fun <A, B, C : PagingDataAdapter<A, B>, D : RecyclerView> BaseFragment.setupPagingRecyclerView(adapter: C, recyclerView: D) {
-	recyclerView.apply {
-		setHasFixedSize(true)
-		this.adapter = adapter
+fun <T> BottomSheetDialogFragment.lifecycleCollectLatest(
+	flow: Flow<T>,
+	collect: suspend (T) -> Unit
+) {
+	lifecycleScope.launchWhenStarted {
+		flow.collectLatest(collect)
 	}
+}
+
+// TODO: Replace with regex.
+/**
+ *
+ * Removes all HTML tags from a given string.
+ *
+ * @return A HTML tag-less string.
+ */
+fun String.Companion.removeHTML(oldString: String): String {
+	var newString = oldString
+	newString = newString.replace("<p>", "")
+	newString = newString.replace("</p>", "")
+	newString = newString.replace("<b>", "")
+	newString = newString.replace("</b>", "")
+	newString = newString.replace("<i>", "")
+	newString = newString.replace("</i>", "")
+	newString = newString.replace("<a>", "")
+	newString = newString.replace("</a>", "")
+	newString = newString.replace("<br />", "")
+	return newString
 }

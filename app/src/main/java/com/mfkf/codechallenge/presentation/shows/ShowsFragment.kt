@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mfkf.codechallenge.databinding.FragmentShowsBinding
 import com.mfkf.codechallenge.presentation.base.BaseFragment
 import com.mfkf.codechallenge.utils.lifecycleCollectLatest
@@ -36,7 +37,11 @@ class ShowsFragment : BaseFragment() {
 	}
 
 	override fun setupUI() {
-
+		binding.showsList.layoutManager = LinearLayoutManager(
+			requireContext(),
+			LinearLayoutManager.HORIZONTAL,
+			false
+		)
 	}
 
 	override fun setupButtons() {
@@ -44,8 +49,14 @@ class ShowsFragment : BaseFragment() {
 	}
 
 	override fun setupObservers() {
-		lifecycleCollectLatest(viewModel.results) {
-			it?.forEach { println(it.show.name) }
+		lifecycleCollectLatest(viewModel.media) {
+			it?.let {
+				binding.showsList.adapter = ShowsAdapter(
+					it,
+					requireContext(),
+					requireActivity().supportFragmentManager
+				)
+			}
 		}
 	}
 

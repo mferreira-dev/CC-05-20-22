@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ImageView
+			android:id="@+id/show_details_poster"
+			android:layout_width="210dp"
+			android:layout_height="295dp"
+			android:layout_marginTop="16dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:background="@color/black" />
+
+		<ProgressBar
+			android:id="@+id/show_details_poster_loading"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintBottom_toBottomOf="@id/show_details_poster"
+			app:layout_constraintEnd_toEndOf="@id/show_details_poster"
+			app:layout_constraintStart_toStartOf="@id/show_details_poster"
+			app:layout_constraintTop_toTopOf="@id/show_details_poster" />
+
+		<TextView
+			android:id="@+id/show_details_no_poster_image"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:gravity="center"
+			android:text="@string/no_poster_image"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="@id/show_details_poster"
+			app:layout_constraintEnd_toEndOf="@id/show_details_poster"
+			app:layout_constraintStart_toStartOf="@id/show_details_poster"
+			app:layout_constraintTop_toTopOf="@id/show_details_poster"
+			tools:visibility="visible" />
+
+		<TextView
+			android:id="@+id/show_details_title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="16dp"
+			android:textAlignment="center"
+			android:textSize="18sp"
+			app:layout_constraintBottom_toTopOf="@id/show_details_status"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/show_details_poster"
+			tools:text="Lord of the Rings" />
+
+		<TextView
+			android:id="@+id/show_details_status"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textAlignment="center"
+			android:textSize="18sp"
+			app:layout_constraintEnd_toEndOf="@id/show_details_title"
+			app:layout_constraintStart_toStartOf="@id/show_details_title"
+			app:layout_constraintTop_toBottomOf="@id/show_details_title"
+			tools:text="Finished" />
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/show_details_rating_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="@id/show_details_title"
+			app:layout_constraintStart_toStartOf="@id/show_details_title"
+			app:layout_constraintTop_toBottomOf="@id/show_details_status"
+			tools:visibility="visible">
+
+			<TextView
+				android:id="@+id/show_details_rating"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:textAlignment="center"
+				android:textSize="18sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="10" />
+
+			<TextView
+				android:id="@+id/show_details_rating_10"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/rating"
+				android:textSize="18sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toEndOf="@id/show_details_rating"
+				app:layout_constraintTop_toTopOf="parent" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+		<TextView
+			android:id="@+id/show_details_summary"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:textSize="18sp"
+			app:layout_constraintEnd_toEndOf="@id/show_details_title"
+			app:layout_constraintStart_toStartOf="@id/show_details_title"
+			app:layout_constraintTop_toBottomOf="@id/show_details_rating_layout"
+			tools:text="Summary goes here." />
+
+		<TextView
+			android:id="@+id/show_details_aliases_lbl"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:text="@string/aliases"
+			android:textAlignment="center"
+			android:textSize="18sp"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="@id/show_details_title"
+			app:layout_constraintStart_toStartOf="@id/show_details_title"
+			app:layout_constraintTop_toBottomOf="@id/show_details_summary"
+			tools:visibility="visible" />
+
+		<TextView
+			android:id="@+id/show_details_aliases"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="8dp"
+			android:textSize="18sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="@id/show_details_title"
+			app:layout_constraintStart_toStartOf="@id/show_details_title"
+			app:layout_constraintTop_toBottomOf="@id/show_details_aliases_lbl"
+			tools:text="LotR" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
