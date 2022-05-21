@@ -64,23 +64,11 @@ fun <T> BottomSheetDialogFragment.lifecycleCollectLatest(
 	}
 }
 
-// TODO: Replace with regex.
 /**
  *
  * Removes all HTML tags from a given string.
  *
  * @return A HTML tag-less string.
  */
-fun String.Companion.removeHTML(oldString: String): String {
-	var newString = oldString
-	newString = newString.replace("<p>", "")
-	newString = newString.replace("</p>", "")
-	newString = newString.replace("<b>", "")
-	newString = newString.replace("</b>", "")
-	newString = newString.replace("<i>", "")
-	newString = newString.replace("</i>", "")
-	newString = newString.replace("<a>", "")
-	newString = newString.replace("</a>", "")
-	newString = newString.replace("<br />", "")
-	return newString
-}
+fun String.Companion.removeHTML(oldString: String) =
+	oldString.replace(Regex("\\<.*?\\>"), "")

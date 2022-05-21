@@ -20,7 +20,7 @@ constructor(private val showsRemoteUseCase: ShowsRemoteUseCase) : ViewModel() {
 
 	init {
 		viewModelScope.launch {
-			searchShows("game of thrones")
+			searchShows("pokemon")
 		}
 	}
 
