@@ -1,1 +1,11 @@
 /build
+executionHistory.bin
+file-system.probe
+md5-checksums.bin
+outputFiles.bin
+resourceHashesCache.bin
+sha1-checksums.bin
+builtOutputCleanup.lock
+executionHistory.lock
+fileHashes.bin
+fileHashes.lock
