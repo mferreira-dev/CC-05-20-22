@@ -51,9 +51,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 
     def retrofit_version = "2.9.0"
     def logging_interceptor_version = "4.9.3"

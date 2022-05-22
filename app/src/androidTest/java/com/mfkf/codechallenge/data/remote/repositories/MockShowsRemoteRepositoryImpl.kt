@@ -12,12 +12,12 @@ class MockShowsRemoteRepositoryImpl : ShowsRemoteRepository {
 
 	private var shouldCallBeSuccessful = false
 
-	val mockMediaList = listOf(
+	private val mockMediaList = listOf(
 		Media(9.0, Show(id = 1, name = "Some show", language = "English")),
 		Media(8.0, Show(id = 2, name = "Some other show", language = "English"))
 	)
 
-	val mockAliasList = listOf(
+	private val mockAliasList = listOf(
 		Alias("Some alias", Country("US")),
 		Alias("Some other alias", Country("US"))
 	)

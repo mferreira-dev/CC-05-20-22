@@ -2,6 +2,6 @@ package com.mfkf.codechallenge.domain.repositories
 
 /**
  *
- * Empty on purpose check [com.mfkf.codechallenge.utils.networkCall] for more information.
+ * Check [com.mfkf.codechallenge.utils.networkCall].
  */
 interface BaseRemoteRepository
