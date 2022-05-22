@@ -29,7 +29,7 @@ class ContainerActivity : BaseActivity() {
 		val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 		navController = navHostFragment.findNavController()
 
-		// Up button will not be displayed on these fragments.
+		// Up button won't be displayed on these fragments.
 		appBarConfiguration = AppBarConfiguration(setOf(R.id.showsFragment))
 
 		setSupportActionBar(binding.containerToolbar)

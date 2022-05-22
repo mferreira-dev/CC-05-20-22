@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mfkf.codechallenge.R
-import com.mfkf.codechallenge.data.remote.models.Media
 import com.mfkf.codechallenge.databinding.FragmentShowDetailsBinding
-import com.mfkf.codechallenge.utils.lifecycleCollectLatest
+import com.mfkf.codechallenge.domain.entities.Media
+import com.mfkf.codechallenge.utils.Result
 import com.mfkf.codechallenge.utils.removeHTML
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +50,7 @@ class ShowDetailsBottomSheet : BottomSheetDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		_binding = FragmentShowDetailsBinding.inflate(inflater, container, false)
-		viewModel = ViewModelProvider(this)[ShowDetailsViewModel::class.java]
+		viewModel = ViewModelProvider(requireActivity())[ShowDetailsViewModel::class.java]
 		return binding.root
 	}
 
@@ -92,12 +92,12 @@ class ShowDetailsBottomSheet : BottomSheetDialogFragment() {
 	}
 
 	private fun setupObservers() {
-		lifecycleCollectLatest(viewModel.aliases) {
-			it?.let {
-				if (it.isNotEmpty())
+		viewModel.aliases.observe(viewLifecycleOwner) {
+			(it as? Result.Success)?.apply {
+				if (data.isNotEmpty())
 					binding.showDetailsAliasesLbl.visibility = View.VISIBLE
 
-				it.forEachIndexed { index, alias ->
+				data.forEachIndexed { index, alias ->
 					val text = binding.showDetailsAliases.text
 
 					if (index == 0)

@@ -1,7 +1,7 @@
 package com.mfkf.codechallenge.data.remote
 
-import com.mfkf.codechallenge.data.remote.models.Alias
-import com.mfkf.codechallenge.data.remote.models.Media
+import com.mfkf.codechallenge.domain.entities.Alias
+import com.mfkf.codechallenge.domain.entities.Media
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

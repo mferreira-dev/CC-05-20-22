@@ -1,7 +1,7 @@
-package com.mfkf.codechallenge.domain.usecases
+package com.mfkf.codechallenge.domain.repositories
 
 /**
  *
  * Empty on purpose check [com.mfkf.codechallenge.utils.networkCall] for more information.
  */
-abstract class BaseUseCase
+interface BaseRemoteRepository

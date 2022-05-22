@@ -7,18 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.mfkf.codechallenge.R
-import com.mfkf.codechallenge.data.remote.models.Media
 import com.mfkf.codechallenge.databinding.ItemShowsBinding
+import com.mfkf.codechallenge.domain.entities.Media
+import com.mfkf.codechallenge.presentation.shows.ShowsAdapter.ShowViewHolder
 import com.mfkf.codechallenge.presentation.shows.details.ShowDetailsBottomSheet
 
 class ShowsAdapter(
 	private val showsList: List<Media>,
 	private val ctx: Context,
 	private val fragmentManager: FragmentManager
-) : RecyclerView.Adapter<ShowsAdapter.ShowViewHolder>() {
+) : Adapter<ShowViewHolder>() {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder =
 		ShowViewHolder(
@@ -37,8 +39,7 @@ class ShowsAdapter(
 		return showsList.size
 	}
 
-	inner class ShowViewHolder(private val binding: ItemShowsBinding) :
-		RecyclerView.ViewHolder(binding.root) {
+	inner class ShowViewHolder(private val binding: ItemShowsBinding) : ViewHolder(binding.root) {
 
 		fun bind(media: Media) {
 			binding.apply {

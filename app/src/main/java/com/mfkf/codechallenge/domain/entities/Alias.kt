@@ -1,4 +1,4 @@
-package com.mfkf.codechallenge.data.remote.models
+package com.mfkf.codechallenge.domain.entities
 
 import com.mfkf.codechallenge.utils.empty
 import com.squareup.moshi.JsonClass

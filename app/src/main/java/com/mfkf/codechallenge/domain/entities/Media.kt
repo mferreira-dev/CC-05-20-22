@@ -1,4 +1,4 @@
-package com.mfkf.codechallenge.data.remote.models
+package com.mfkf.codechallenge.domain.entities
 
 import android.os.Parcelable
 import com.mfkf.codechallenge.utils.empty

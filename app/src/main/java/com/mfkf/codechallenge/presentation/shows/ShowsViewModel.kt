@@ -1,36 +1,37 @@
 package com.mfkf.codechallenge.presentation.shows
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mfkf.codechallenge.data.remote.models.Media
-import com.mfkf.codechallenge.domain.usecases.ShowsRemoteUseCase
+import com.mfkf.codechallenge.domain.entities.Media
+import com.mfkf.codechallenge.domain.repositories.ShowsRemoteRepository
+import com.mfkf.codechallenge.utils.Failure
+import com.mfkf.codechallenge.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ShowsViewModel
 @Inject
-constructor(private val showsRemoteUseCase: ShowsRemoteUseCase) : ViewModel() {
+constructor(
+	private val showsRemoteRepository: ShowsRemoteRepository
+) : ViewModel() {
 
-	private val _media = MutableStateFlow<List<Media>?>(null)
-	val media = _media.asStateFlow()
+	private val _media = MutableLiveData<Result<List<Media>, Failure>>()
+	val media: LiveData<Result<List<Media>, Failure>>
+		get() = _media
 
-	init {
+	fun searchShow(query: String) {
 		viewModelScope.launch {
-			searchShows("pokemon")
-		}
-	}
+			val result = showsRemoteRepository.searchShow(query)
 
-	private suspend fun searchShows(query: String) {
-		showsRemoteUseCase.searchShows(query).either(
-			success = {
-				_media.value = it
-			},
-			failure = {}
-		)
+			_media.value = when (result) {
+				is Result.Success -> Result.Success(result.data)
+				is Result.Error -> Result.Error(result.message)
+			}
+		}
 	}
 
 }

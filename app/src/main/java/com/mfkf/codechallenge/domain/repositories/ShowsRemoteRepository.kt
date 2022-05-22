@@ -1,10 +1,11 @@
 package com.mfkf.codechallenge.domain.repositories
 
-import com.mfkf.codechallenge.data.remote.models.Alias
-import com.mfkf.codechallenge.data.remote.models.Media
+import com.mfkf.codechallenge.domain.entities.Alias
+import com.mfkf.codechallenge.domain.entities.Media
+import com.mfkf.codechallenge.utils.Result
+import com.mfkf.codechallenge.utils.Failure
 
-interface ShowsRemoteRepository {
-	suspend fun searchShows(query: String): List<Media>
-	suspend fun singleSearchShows(query: String): List<Media>
-	suspend fun fetchAliases(id: Int): List<Alias>
+interface ShowsRemoteRepository : BaseRemoteRepository {
+	suspend fun searchShow(query: String): Result<List<Media>, Failure>
+	suspend fun fetchAliases(id: Int): Result<List<Alias>, Failure>
 }
