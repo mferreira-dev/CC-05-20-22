@@ -4,4 +4,8 @@
 	<string name="no_poster_image">No poster image found.</string>
 	<string name="rating">/10</string>
 	<string name="aliases">Aliases</string>
+	<string name="search">Search</string>
+	<string name="get_started">Press the magnifier action button to get started.</string>
+	<string name="no_results">No results.</string>
+	<string name="request_error">Something went wrong.</string>
 </resources>

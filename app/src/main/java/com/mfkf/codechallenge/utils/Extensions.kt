@@ -1,5 +1,8 @@
 package com.mfkf.codechallenge.utils
 
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.mfkf.codechallenge.data.remote.utils.NoConnectivityException
 import com.mfkf.codechallenge.domain.repositories.BaseRemoteRepository
 
@@ -35,3 +38,9 @@ suspend fun <T> BaseRemoteRepository.networkCall(action: suspend () -> T): Resul
  */
 fun String.Companion.removeHTML(oldString: String) =
 	oldString.replace(Regex("\\<.*?\\>"), "")
+
+fun View.hideKeyboard() {
+	this.clearFocus()
+	val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+	imm.hideSoftInputFromWindow(windowToken, 0)
+}
