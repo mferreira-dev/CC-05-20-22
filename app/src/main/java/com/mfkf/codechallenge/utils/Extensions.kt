@@ -1,14 +1,13 @@
 package com.mfkf.codechallenge.utils
 
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.mfkf.codechallenge.presentation.base.BaseFragment
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import com.mfkf.codechallenge.data.remote.utils.NoConnectivityException
+import com.mfkf.codechallenge.domain.repositories.BaseRemoteRepository
 
 /**
- * Static String type function that returns an empty string.
+ * Returns an empty string.
  *
  * @return An empty string.
  */
@@ -16,27 +15,32 @@ fun String.Companion.empty() = ""
 
 /**
  *
- * Generic function that initializes an observer.
+ * Network call response handler.
  *
- * @param flow Data stream to be observed.
- * @param collect Higher-order function to be used as the flow's callback.
+ * @param action A higher-order function that represents a network call.
+ * @return An instance of the Result sealed class according to the result.
  */
-fun <T> BaseFragment.lifecycleCollectLatest(flow: Flow<T>, collect: suspend (T) -> Unit) {
-	lifecycleScope.launchWhenStarted {
-		flow.collectLatest(collect)
+suspend fun <T> BaseRemoteRepository.networkCall(action: suspend () -> T): Result<T, Failure> {
+	return try {
+		Result.Success(action.invoke())
+	} catch (ex: NoConnectivityException) {
+		Result.Error(Failure.NoConnectivity)
+	} catch (ex: Exception) {
+		Result.Error(Failure.ServerError)
 	}
 }
 
 /**
  *
- * Generic function to initialize a RecyclerView using a PagingDataAdapter.
+ * Removes all HTML tags from a given string.
  *
- * @param adapter Adapter to be set to the RecyclerView. Must inherit from PagingDataAdapter
- * @param recyclerView RecyclerView to be used.
+ * @return A HTML tag-less string.
  */
-fun <A, B, C : PagingDataAdapter<A, B>, D : RecyclerView> BaseFragment.setupPagingRecyclerView(adapter: C, recyclerView: D) {
-	recyclerView.apply {
-		setHasFixedSize(true)
-		this.adapter = adapter
-	}
+fun String.Companion.removeHTML(oldString: String) =
+	oldString.replace(Regex("\\<.*?\\>"), "")
+
+fun View.hideKeyboard() {
+	this.clearFocus()
+	val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+	imm.hideSoftInputFromWindow(windowToken, 0)
 }

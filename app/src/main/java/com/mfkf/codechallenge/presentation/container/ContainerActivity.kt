@@ -1,6 +1,7 @@
 package com.mfkf.codechallenge.presentation.container
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ class ContainerActivity : BaseActivity() {
 	private lateinit var binding: ActivityContainerBinding
 	private lateinit var navController: NavController
 	private lateinit var appBarConfiguration: AppBarConfiguration
+	lateinit var viewModel: ContainerViewModel
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -29,11 +31,18 @@ class ContainerActivity : BaseActivity() {
 		val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 		navController = navHostFragment.findNavController()
 
-		// Up button will not be displayed on these fragments.
+		// Up button won't be displayed on these fragments.
 		appBarConfiguration = AppBarConfiguration(setOf(R.id.showsFragment))
-
-		setSupportActionBar(binding.containerToolbar)
 		setupActionBarWithNavController(navController, appBarConfiguration)
+	}
+
+	override fun setupObservers() {
+		viewModel.isLoading.observe(this) {
+			if (it.hasNotBeenHandled()) {
+				binding.loadingProgressContainer.visibility =
+					if (it.peekContent()) View.VISIBLE else View.GONE
+			}
+		}
 	}
 
 }
