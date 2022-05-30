@@ -50,6 +50,12 @@ class ShowsFragment : BaseFragment() {
 			LinearLayoutManager.HORIZONTAL,
 			false
 		)
+
+		binding.showsList.adapter = ShowsAdapter(
+			listOf(),
+			requireContext(),
+			requireActivity().supportFragmentManager
+		)
 	}
 
 	override fun setupButtons() {
