@@ -24,7 +24,7 @@ constructor(
 	val isLoading: LiveData<Event<Boolean>>
 		get() = _isLoading
 
-	val _viewState = ShowsViewState()
+	private var _viewState = ShowsViewState()
 	val viewState = MutableLiveData<ShowsViewState>()
 
 	private val _media = MutableLiveData<Result<List<Media>, Failure>>()
@@ -44,14 +44,14 @@ constructor(
 
 			_media.value = when (result) {
 				is Result.Success -> {
-					if (result.data.isEmpty())
-						viewState.value = ShowsViewState(
+					_viewState = if (result.data.isEmpty())
+						ShowsViewState(
 							getStarted = false,
 							noResults = true,
 							requestError = false
 						)
 					else
-						viewState.value = ShowsViewState(getStarted = false, noResults = false)
+						ShowsViewState(getStarted = false, noResults = false)
 
 					Result.Success(result.data)
 				}
@@ -61,6 +61,7 @@ constructor(
 				}
 			}
 
+			viewState.value = _viewState
 			_isLoading.postValue(Event(false))
 		}
 	}
